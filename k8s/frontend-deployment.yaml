@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: frontend-proyecto-kubernetes:1.0
+          image: leonor21/frontend-proyecto-kubernetes:1.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
