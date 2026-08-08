@@ -1,0 +1,24 @@
+# Dependencias
+node_modules/
+
+# Compilados
+dist/
+build/
+
+# Entornos y credenciales
+.env
+.env.local
+*.local
+
+# Configuración de editores
+.vscode/
+.idea/
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Registros
+*.log
+npm-debug.log*
