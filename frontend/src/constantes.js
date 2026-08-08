@@ -45,6 +45,42 @@ export function fechaLegible(iso) {
   return anio === String(new Date().getFullYear()) ? etiqueta : `${etiqueta} ${anio}`;
 }
 
+// "2026-08-15" -> "15/08/2026"
+export function isoATexto(iso) {
+  if (!iso) return "";
+  const [anio, mes, dia] = iso.split("-");
+  return `${dia}/${mes}/${anio}`;
+}
+
+// "15/08/2026" -> "2026-08-15", o null si la fecha no existe (ej. 31/02/2026)
+export function textoAIso(texto) {
+  const partes = texto.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!partes) return null;
+
+  const dia = Number(partes[1]);
+  const mes = Number(partes[2]);
+  const anio = Number(partes[3]);
+
+  const fecha = new Date(anio, mes - 1, dia);
+  const existe =
+    fecha.getFullYear() === anio &&
+    fecha.getMonth() === mes - 1 &&
+    fecha.getDate() === dia;
+
+  if (!existe) return null;
+  return `${anio}-${String(mes).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+}
+
+// Va colocando las barras mientras se escribe: "1508" -> "15/08"
+export function formatearFechaTexto(entrada) {
+  const digitos = entrada.replace(/\D/g, "").slice(0, 8);
+  const partes = [];
+  if (digitos.length > 0) partes.push(digitos.slice(0, 2));
+  if (digitos.length > 2) partes.push(digitos.slice(2, 4));
+  if (digitos.length > 4) partes.push(digitos.slice(4, 8));
+  return partes.join("/");
+}
+
 export function estaVencida(tarea) {
   return Boolean(
     tarea.fechaLimite &&

@@ -137,6 +137,61 @@ body {
 .campo--titulo:focus-visible { outline: none; }
 .campo--mini { font-size: 14px; padding: 8px 10px; min-width: 130px; }
 
+/* ---------- Campo de fecha ---------- */
+
+.fecha-campo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 9px;
+  background: var(--tarjeta);
+}
+
+.fecha-campo:focus-within { outline: 2px solid var(--senal); outline-offset: 1px; }
+.fecha-campo--invalido { border-color: var(--alerta); }
+
+.fecha-campo__texto {
+  width: 105px;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 0 8px 10px;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.fecha-campo__texto:focus-visible { outline: none; }
+.fecha-campo--invalido .fecha-campo__texto { color: var(--alerta); }
+
+.fecha-campo__boton {
+  display: grid;
+  place-items: center;
+  width: 28px; height: 28px;
+  margin-right: 3px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--suave);
+  cursor: pointer;
+}
+
+.fecha-campo__boton svg { width: 15px; height: 15px; }
+.fecha-campo__boton:hover { color: var(--tinta); background: var(--papel); }
+.fecha-campo__boton:focus-visible { outline: 2px solid var(--senal); outline-offset: 1px; }
+
+/* Solo existe para abrir el calendario nativo; no se ve. */
+.fecha-campo__calendario {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  width: 1px; height: 1px;
+  padding: 0;
+  border: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* ---------- Botones ---------- */
 
 .boton {

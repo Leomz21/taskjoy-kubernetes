@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { PRIORIDADES, CATEGORIAS_SUGERIDAS } from '../constantes.js'
+import CampoFecha from './CampoFecha.jsx'
 
 /**
  * Formulario para crear o editar una tarea.
@@ -66,15 +67,13 @@ export default function FormularioTarea({
           </select>
         </label>
 
-        <label className="control">
+        <div className="control">
           <span className="control__etiqueta">Fecha límite</span>
-          <input
-            className="campo campo--mini"
-            type="date"
-            value={datos.fechaLimite}
-            onChange={e => actualizar('fechaLimite', e.target.value)}
+          <CampoFecha
+            valor={datos.fechaLimite}
+            onChange={valor => actualizar('fechaLimite', valor)}
           />
-        </label>
+        </div>
 
         <div className="formulario__acciones">
           {onCancelar && (
