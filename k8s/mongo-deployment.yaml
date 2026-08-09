@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-datos
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,6 +17,10 @@ metadata:
     app: mongo
 spec:
   replicas: 1
+  strategy:
+    # Apaga el pod viejo antes de crear el nuevo. Es obligatorio aqui:
+    # el volumen es ReadWriteOnce y dos pods a la vez se quedarian bloqueados.
+    type: Recreate
   selector:
     matchLabels:
       app: mongo
@@ -30,6 +45,15 @@ spec:
                 secretKeyRef:
                   name: mongo-secret
                   key: MONGO_PASSWORD
+          volumeMounts:
+            # /data/db es la carpeta donde MongoDB escribe. Al montarla sobre el
+            # volumen persistente, los datos dejan de vivir dentro del contenedor.
+            - name: datos
+              mountPath: /data/db
+      volumes:
+        - name: datos
+          persistentVolumeClaim:
+            claimName: mongo-datos
 ---
 apiVersion: v1
 kind: Service
