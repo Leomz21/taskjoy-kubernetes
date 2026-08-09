@@ -3,7 +3,5 @@ kind: ConfigMap
 metadata:
   name: frontend-config
 data:
-  # UNICA LINEA QUE DEBES CAMBIAR EN TODO EL PROYECTO.
-  # Reemplaza 100.x.x.x por la IP de Tailscale de tu companero (Maquina A)
-  # y 30081 por el NodePort del backend que acordaron.
-  API_URL: "http://100.x.x.x:30081"
+  # Direccion del backend: IP de Tailscale de la Maquina A + NodePort acordado.
+  API_URL: "http://100.100.218.111:30081"
